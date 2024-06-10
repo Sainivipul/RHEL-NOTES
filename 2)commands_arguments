@@ -1,0 +1,59 @@
+echo $SHELL = show me which shell are we using right now 
+
+cat /etc/shells = show which shells are available in the system 
+
+ echo hellow      world = hellow world ( shell n apna demag lgaya or extra space hta diya line analalysis )
+
+ echo " helloow     world" helloow    world ( as it is print maar diya )
+
+ NOTE - DIFF BTW SINGLE QUOTE AND DOUBLE QUOTE 
+
+ var=500
+
+ echo "$Vvar"= 500 value is printed
+
+ echo '$var'= var name print as it is 
+
+ spl excaping charector 
+ echo -e " aline with \n newline " = aline with 
+                                     new line
+ 
+ \t= will give a tab space 
+
+ commands _ (a) external command and shell build in command 
+
+ type command = will show if command is shell builtin or external 
+ extyernal commands have binaray present which means it is not shell builtin example lsblk (external)
+ cd( shell built in )
+
+------------------(control operators)----------------------------------
+;= saprate multiple commands and exicute them one by one
+ex pwd ; date ; cal (it will happen in serial/sequnce)
+
+&= exicute mutiple command at a same time 
+
+sleep 20 & cal ( both will occur at the same time )
+
+$?= check the exicution of previous command ( 0 = success , anyother number = fail )
+
+ ex echo $?
+
+&&= LOGICAL AND
+||= LOGICAL OR 
+#= ignore the line 
+!!= repeate last command 
+!few alphabats pf previous any command 
+history = history of commans 
+!no of command 
+
+note control operator after \ will be treat as a text 
+
+system defined varibale are in caps 
+
+echo $HOME = print HOME ( sysrtem varibale )
+
+echo $home = treat as defined varibale print only if defined
+
+set command used to get all the set variable in system 
+ubset used to unset any varable 
+

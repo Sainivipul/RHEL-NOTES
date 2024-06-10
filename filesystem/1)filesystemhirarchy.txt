@@ -1,0 +1,60 @@
+linux file tree
+linux have three root
+
+
+/=root directory (poarent of all directory )
+   contain mutiple dir ex. bim mnt srv etc etc 
+   some important dir from root dir are as below 
+
+/bin= contain exicutable binary file ex cat command works because cat binary file present in bin.
+
+/sbin= sytem binary commands which need su user permission for exicution 
+
+/lib= binary which are found in bin and sbin it usually contain libraray.
+
+/opt= purpose to store optional software.
+
+/boot= karnal images which used at the time of booting grub2 dir contain boot loder file 
+grub.cfg is most important file in it.
+
+/etc= whatever related to system config is present in /etc 
+
+/home= contain home dir of normal user 
+
+/root=  root user home dir
+
+/srv= gernally empty but it is can be utilized to server data for server.
+
+/media = empty but get automatically mounted when we attach any external device like pendirive 
+
+/mnt= mount iso image can be use as mount point
+
+/tmp= bydefault sticky attached ( we can delete only our file ) it is a temp data file 
+
+/dev= contain info of devices in the form of file 
+
+/null = very imp dir if is actully a file which cant be read this file can absorb any size of data use for spl purpose 
+
+/proc= process related information (it does not take disk space ) used to interact with kernal directly.
+
+/var= contain information about logs 
+
+
+
+/root = root user home directory 
+root = su user/ root user 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+man= man comand give mannual of file 
+      man file name give mannual of file 
+whatis= whatis commandname give summrise information of that cammoand 
+
+whereis= to see the mannual locatiopn of that command 
+
+ls -ll(detail info)
+ls - lh(details with human redable )
+ls -ld(precise info of perticular dir)
+
+rm -rf dirname = used to del any ddir along with content
+
+

@@ -1,0 +1,69 @@
+#####MIGREATE LVM from one server to other server##### 
+LV1 on DISK1_SERVER1 
+
+#step1- unmount
+umount /dir
+
+#step2 deactivate Volgrup 
+vgchnage -an VolGrp 
+
+#step3 export VG 
+
+vgexport VG
+
+#step4 poweroff current servwer 
+init 0
+
+#step5 switch to another server on which we wannt to import it (use an existing Virtual disk )
+and locate that perticular virtual disk 
+power on the machine our older disk will be available but only server is change 
+physical volumes will be available but no vg will be available 
+
+
+#step6 import vg and activate it 
+vgimport  VG
+vgchange -ay VG 
+
+#step7 - now LV automatically got configured like befor 
+just mount it on dir on which it was previously mounted 
+
+------------(migrate LV and VG from one Disk to another )------------------
+
+DISK1 (sdb)--> sdb1 --> physicalvol-->volgrp newVG-->logical vol newLV (format FS and mount data)
+
+to migrate it on other disk first we need to make partition on other disk
+#step1 paertion on other disk
+
+DISK2 (sdc)--> partition(sdc1)
+
+#step2 Extend the vg 
+vgextend NewVg /dev/sdc1         **important
+
+#move physical volume 
+pvmove -n NewLV /dev/sdb1 /dev/sdc1
+
+nowdata NNEWVG and NEW LV is moved on sdc disk which was befor on sdb
+but we can see Newvg nad newlv aslo present on sdb1 so can remove it 
+
+# remove vg and lv from sdb 
+vgreduce NewVg /dev/sdb1 
+
+------------{##migrate all the LV and Vg to diffrent Disk}-----
+check availabe LV and Vf (lsblk )
+(vgs -o+devices )
+
+#step1 create partiton and physical vol  on that disk on which data is need to be transfer 
+fsidk -l sdd --> sdd1(partition)
+pvcreate /dev/sdd1
+
+#step2 extend vgs which need to be migrated with pv on other disk 
+vgextend rhel(command volgroup ) /dev/sdd1\
+
+#step3 move LVMs
+
+pvmove -n root /dev/sdc1 /dev/sdd1
+pvmove -n swap /dev/sdc1 /dev/sdd1
+
+
+
+

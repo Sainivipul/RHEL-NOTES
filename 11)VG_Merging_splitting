@@ -1,0 +1,57 @@
+
+
+
+
+
+
+DISK> Partitios> phycalvolumes> volumeGroups  (vg1)(vg2)> 
+lvcreate -L 100G -n lv1 vg1 > fornmnat as file system > mount dir on LVS
+
+
+
+
+# now we have  logical volume with mounted disk 
+
+ 1> # unnmount both dir on both LVS 
+ 2> # we wants to merge vg2 vol group im vg1 then we need to deactivate vg2 group 
+
+ vgchannge -an vg2 
+
+ 3> check lvscann / vgs / lvs 
+
+ 4> vgmerge (jiske sath merge krnna ) (jisko merge krana)
+
+ vgmerge vg1 vg2 
+
+ check vgs /lvs/lvscan 
+NOTE : but our lvm on that vg which was deactivate is still inactive lets activate it 
+
+lvchange -ay /dev/vg1(kyuki vg2 to rha nnahi)/lv2 
+
+now mout both unmounted dir 
+
+mount /dev/vg1/lv1 test1 
+mount /dev/vg1/lv2 test2
+
+
+------------splittig ---------------------
+step1-- unmount 
+while splitting volume group we can select which physical volume we wat to take while splittig 
+ check pvs 
+
+ step2-- deactivate vg 
+
+ vgchange -ay vg1 
+
+ step3---- splitinnng 
+
+ vgsplit vg1(jisko uchanged rakhna ) vg2(jo spiltt krke nya bnana ) /dev/sda2 (nye split vg ka physical vol)
+
+ step4----
+
+activate both 
+
+vgchange -ay vg1 vg2 
+
+
+

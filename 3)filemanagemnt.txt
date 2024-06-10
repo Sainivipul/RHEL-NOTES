@@ -1,0 +1,66 @@
+touch->create filedo not open it for editing 
+vim/vi -> create file as well as open it for edditing 
+
+lsblk -> used to list blocks show disk partition (block file used for disk space )
+
+d- dir
+l- link file 
+b- block file 
+
+file filenname= it will display and make us understant what kind of file it is 
+note_ file command do not idenntify file type by the extension like windows it identyfy on the bases of conrtenrt present in the file 
+
+
+------------(timestamp modification of files)--------------------------------- 
+
+current time - touch filename(exixtingfile)
+past time- touch -t yyyymmddtt:tt filename
+example to set time stemp at 10 jan 2014 03:54 for filename my.txt
+
+touch 201401100354 my.txt
+
+-----------(multiple file creeation)---------------------------------------
+
+touch file{1..100}.txt --> 100 files ion single go 
+
+mv -cutpaste / rename of file 
+
+mv filename destinationdir 
+ex--> mv myfile.txt /home/vipul/ (no change in name of file )
+ex--> mv myfile.txt /home/vipul/yourfile.txt (file name also changed rename )
+
+alias= used to give alaise for commands 
+command cat set to dog 
+alise dog=cat 
+dog file.txt will show the content (tempory change oncwe logout alias will be gone )
+
+---------------(file contant management commands )-----------------------------
+
+head filename = first 10 lines of file 
+head -n filename= n number of lines of the file 
+tail filename,tail -n filename= last 10/ last n lines of the file 
+cat > filemame= createnew file if not present and prompt us to add conetent and override the content if file exist 
+cat >> same as above but concatinate data do not overwrite 
+cat >filemame <<markername(naything stop,outetcetc )= it will help to write content of the file and when we will type the custom marker 
+it will come out of adding and save above lines 
+ex( cat > summer.txt <<stop )
+
+basically > usewd to transfer or save data intofiles 
+
+echo helow > newfile.txt ( createnew file if not prent and save OR SAVE IN ECXISTING FILE )
+
+cat file.txt > newfile.txt (copy content of file.txt into newfile.txt)
+
+tac filename ( reverse of cat disply file content in reverse order )
+
+more= used to open large content file 
+open file page by page 
+enter - scroll down 
+space- fast scroll down 
+q - exit file 
+
+less= same purspose as more command (just not show the persentage )
+
+NOTE: CTA COMMAND CAN NOT BE USEWD TO SEE THE CONTENT OF BINARY FILES 
+TO SEE THE CONETNT OF BINARY FILES WE NEED TO USE ( strings filename )
+

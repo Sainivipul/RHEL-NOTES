@@ -1,0 +1,90 @@
+*
+ls file* = give all the files matching with file
+ ?
+ ls File? = only matches only one alphabat can be diff 
+ ls fil?? only two alphabat can be diff 
+
+ -------------------------------------------------------------
+ # find command 
+
+ find location -option filename 
+. (current location) 
+/ (entire system )_
+
+options == -name ( case sensitive ) ex find /root/ -name vipul 
+        == -iname ( case insensitive) ex find /root/ -iname vipul 
+
+        == -type ( type of file ) -type d (directory), -type f (files) ex find /root/ -type d myclassews 
+
+find files with permissions 
+
+find location -type  -perm (permission) -print 
+
+ex find . -type f -perm 0777 -print
+ex find . -type f -perm !0777 -print (ALL FILES EXECT PERM 0777)
+
+FIND ALL THE FILES SET TO SUID BIT 
+
+find / -perm /u=s
+
+find all the files with read only permissions 
+
+find / -perm /u=s
+
+find all files with sgidit set 
+
+find / -perm /u=g
+
+find all the exicutable files
+
+find / -perm /a=x
+
+find all the files/dir with permmison 777 and chnage them to 755 in single command 
+
+find / -type f/d -perm 0777 -print -exec chmod 755{}\;
+
+ find perticular file name is vipulfile and remove it 
+
+ find / -type f -name "vipul.txt" -exec rm -f {} \;
+
+ find all the commands with extension .txt and remove them 
+
+ find / -type f -name "*.txt" -exec rm -f {} \;
+
+ find all th empty file/dir  and remove them 
+
+ find / -type f/d -empty -exec -rm {} \;
+
+ find all the hidden file 
+
+ find / -type f -name |".*"
+
+ find user speacified file 
+
+ find . -user root -name filename.txt
+
+ find files based o group 
+
+ find /location / -gname groupname 
+
+ find all the  files modified in past 50 days 
+
+
+ find /location -mtime 50 days 
+
+ for access time use (-atime)
+
+find all the filed modified btw 50 to 100 days
+
+find /location -mtime +50 -mtime -100
+
+find all the files changed in last few mins 
+
+find / -cmin -60(i hr )
+
+files modifies in  last <hr>
+find /location -mtime -60(any number of digits)
+
+
+
+

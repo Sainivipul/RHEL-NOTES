@@ -1,0 +1,38 @@
+grep - popular linux tool to find any string or expression 
+
+ex file text.txt 
+
+=> grep u text.txt ( will give all the lines containing u )
+
+-----------------(EXTENDED EXPRESSION)-----------------------
+find any  line containing i or e (OR operation )
+
+=> grep -E 'i|a' file.txt
+
+=> grep -G 'i\|a' file.txt
+
+how to match ending of stingss 
+
+=> grep a$ file.txt ( all lines ending with alphabat a)
+
+match the start of line 
+
+=> grep ^val file.txt ( lines starting with val )
+
+------------------------(regular expressions)-------------
+
+=> grep '\bword/b' file.txt ( serach for word after an space )
+
+=> grep -w over file.txt ( only find isolated word over same a s above )
+
+
+------------------(STRING EDDITING {SED COMMAND })-------------------------
+Replace/susbtitue
+
+=> sed -i 's/worda/wordb' -g filename (word a will be replaced by word b in file )
+
+Double the STRING
+
+=> sed -i 's/word/&&' -g filename ( word will be replaced by wordword )
+
+

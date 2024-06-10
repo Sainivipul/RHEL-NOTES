@@ -1,0 +1,88 @@
+#lets consider we have two disk sdb sdc 
+STEPS -->
+a- partition of disk 
+b- physical volume 
+c- volume groups
+d- Logical volume 
+e- file syatem allocation 
+f- mounting of dir 
+
+# Step1 Partition creation 
+
+DISK1- fdisk /dev/sdb --> 2 partition ( /dev/sdb1  /dev/sdb2)
+DISK2- fdisk /dev/sdc --> 2 poartion ( /dev/sdc1  , /dev/sdc2)
+
+# STEP2 Physical volume 
+
+check available physical volume = pvs or pvdisplay 
+
+create physical volume -------------------
+
+pvcreate /dev/sdb1
+
+pvcreate /dev/sdc1
+
+# STEP3 Volume group 
+
+check available volume group --> vgs or vgdisplay 
+
+vgcreate Linuxvg(name) /dev/sdb1 /dev/sdb2 
+
+# Step 4 LVM logical volume create 
+ check details --> lvs or lvdisplay 
+
+ lvcrteate -L 4(size of logical volume ) -n Linuxlv(name) Linuxvg(volume group name )
+
+ check lsblk 
+
+
+
+ # step 5 file system 
+
+ check details --> lsblk -f
+
+ mkfs.xvf4 /dev/Linuxvg /linuxlv
+           or
+ mkfs/ext4 /dev/devmapper/linuxvg-linuxlv
+
+ check details lsblk 
+
+ # step 6
+
+check details ---> df -Th
+
+mount /dev/LinuxVG/Linuxlv /DIR
+
+----------------------------------------------------------------
+## LV EXTEND ##
+
+
+case a) we have space in volume group 
+
+lvextend -L +xM(mb)/xG(GB) /dev/Linuxvg/Linuxlv -r
+
+NOTE: if it is not visible on filesystem 
+--> resize2fs /dev/Linuxvg/Linuxlv (for ext file system )
+
+case b) we do not have space in VG 
+
+use other physical volume or create physical volume 
+
+vgextend Linuxvg /dev/sdc2 -r 
+
+for: xvf file system 
+ --> xfs_growfs /xfsdir(dir where it is mounted )
+
+------------------------------------------------------------
+## LV reduce ##
+step1 unmount /DIR
+step2 fsck -f /dev/Linuxvg/Linuxlv
+step3 resize2fs /dev/Linuxvg/Linuxlv xG(desired size )
+step4 lvreduce -L 5G /dev/Linuxvg/Linuxlv
+step4 resize2fs /dev/Linuxvg/Linuxlv 5G
+step5 fsck -f /dev/Limuxvg/Limuxlv 
+step6 mount /dev/Linuxvg/Limuxlv /dir 
+
+NOTE: for xvf file system we cant performe reduction 
+
+

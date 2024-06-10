@@ -1,0 +1,57 @@
+=> whoami ( username )
+
+=> who ( who is logged in on system )
+
+=> w (detailed info same as who)
+
+=> id ( user details , root id , primeary group etc)
+
+# switch user 
+=> su username 
+NOTE: su username ( switch in any user but do not user env variable 
+)  su -username  ( it will use all the env details also )
+
+# add user 
+
+=>useradd username 
+
+# check user details 
+
+=> cat /etc/passwd ( local user management file )
+username: passwad details : userid : group id : displayname : location of home dir : default login shell 
+important file 
+
+# delete user 
+
+=> userdel -r username (-r will del. home dir of user )
+
+#usermodification
+
+# display name 
+
+=> usermod -c 'nname need to be diplayed ' username 
+
+-----------------( password MANAGEMNT )--------------------------
+
+# detailed user add 
+
+=> useradd -m(modified) -d /home/vipul (home dir location) -c "Display name " username 
+
+ex: useradd -m -d /home/saini -c " sainibhai" vipul 
+
+# password management file for users shadow file - it containes the encripted password
+for the users 
+!!- no password 
+
+=> cat /etc/shadow
+name of the user: encripted passwd: day of last passwd change(ist jan 1970 ) : days passwd must be left unchaninged 
+: password expire date : warning no of sdays of passwd expire : no of days after pass expire accounbt disable : day the account get disable  
+
+# set password 
+
+=> passwd username 
+
+
+
+
+

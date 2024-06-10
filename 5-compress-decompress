@@ -1,0 +1,73 @@
+COMPRESS command = gzip filename 
+extension =.gzip
+----(multiple file compresion )------------
+
+=> gzip file1.txt file2.txt ...
+=> gzip *.txt (all file with txt extension will be compress)|
+
+NOTE: to view content of compress file 
+
+=> zcat filename
+
+=> zmore filename 
+
+=> zless filename 
+
+--------------(uncompress)------------------
+
+UNCOMPRESS command = gunzip filename 
+
+=> gunzip filemname
+
+=> gunzip file1 file2 file 3 
+
+=> gunzip *.gz/any extension (all file with extension will be uncompress)
+
+------------------(better compress command )------------
+
+=> bzip2 filename 
+
+=> bzip2 file1 file2 
+
+=> bzip *.extemsiom 
+
+NOTE : to view the content of file 
+
+=> bzcat /bzmore/bzless filename 
+
+-----------------------(uncompress)--------------------------
+
+=> bunzip2 filename
+
+---------------------(zip several file into one )--------------
+tar= tapearchive 
+
+=> tar cf tarfilename(anyname).tar/.zip  file1name file2name ...
+
+note new file extension must be .tar or .zip 
+
+----------------(zip and compress in one command )-------------
+
+=> tar czf filename.tar.gz file1.txt file2.txt...
+extension will be gz
+
+same thing with gz2 utility 
+=> tar cjf filename.tar.gz2 file1 file2 
+
+NOTE: view content of tarfile 
+
+=> tar tvf filename.tar
+
+to check if file1 is present in tar file or not
+
+=> tar tvf tarfile.zip file1.txt
+
+
+---------------------(UNZIP file ZIP by tar uyility)-----------
+
+=> tar xvf filename.tar
+
+Zip file while preserving permissions 
+
+=> tar cvpf filename.tar file1.txt
+

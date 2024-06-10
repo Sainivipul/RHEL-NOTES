@@ -1,0 +1,142 @@
+## LVM snapshot ##
+
+lvcreate -L 1G -s(snapshot) -n(name) snap_data /dev/system/data(LVM PATH)
+
+if lv snapshot reach 100% it will be courept
+
+///////////restore//////////////////
+
+lvconvert --merge /dev/system/snap_data(snapshot path )
+
+now deactivate and reactivate lvm and do mounting
+
+deactivate 
+
+-->lvchange -an /dev/system/data 
+chwecK lvs
+activate 
+
+--> lvchange -ay /dev/system/data
+
+.. mount .dev/system/data /data (mounting)
+
+----------------## Recover/restore Deleted LVM with DATA -------------------
+when ever we remove any lvm lvremove the system will genrate an archive at /etc/lvm/archive 
+
+ls -ltrha /etc/lvm/archive 
+
+check the details which step or lvm we require and copy the path of same 
+
+--> vgcfgrestore --list Volgrp(vol.group name)
+
+--> vgcfgrestore -f /etc/lvm/archive....(colplete path we copied) vilgrop(volume group name )
+
+it will restore LVm but still in inactive command 
+check --> lvs  or lvscan 
+
+#activate 
+
+--> lvchange -ay /dev/Volgrp/Logvol (path of lv)
+
+----------------------(Merge Two VOL.groups with datat loss)------------------
+
+disk1 sda --> VG1  LV1(ext4) with mounted dir1(data)
+disk2 sdb --> VG2  LV2(ext4) with mounted dir2(data)
+
+now merge vg1 and vg2 
+
+#step1 -first unmmount 
+
+umount /data1
+umount /data2
+
+#step2 deactivate VG(whuich need to me mergerd )
+
+vgchange -an VG2
+
+# step 3 merge 
+
+vgmerge VG1 VG2 
+
+# step 4 
+
+reactivate VG2
+
+vgchange -ay VG1/LV2 
+
+now data willb e available on LV1 AND LV2 but now VG are mergerd and 
+lvs 
+
+LV1-->VG1
+LV2--VG1
+
+
+---------------(Merge and Split the VG without rebooting )-----------------------
+  ##MERGING
+
+disk1(sdb)
+fdisk -f sdb --> sdb1 , sdb2 ( partition )
+  !
+pvcreate /dev/sdb1 /dev/sdb2 (physical volume )
+   !
+vgcreate VG1 /dev/sdb1  (Volgroup)
+vgcreate VG2 /dev/sdb2
+    !
+lvcreate -L 1000M -n LV1 VG1
+lvcreate -L 1000M -n LV2 VG2   (logical volumes )
+    !
+mkfs.ext4 /dev/VG1/LV1
+mkfs.ext4 /dev/VG2/LV2  (file system )
+    !
+mount /dev/VG1/LV1 /dir1  (mounting of dir )
+mount /dev/VG2/LV2 /dir2
+
+
+--first merging 
+#step1 - unmount 
+umount /dir1
+umount /dir2 
+
+# step 2 Deactivate 
+
+vgchnage -an VG2
+
+#step3 Merging 
+
+vgmerge VG1 VG2
+
+# step 4 reactivate 
+
+vgchnage -ay VG1/LV2
+
+# step 4 remount data 
+
+mount /dev/VG1/LV1 /dir1
+mount /dev/VG1/LV2 /dir2
+
+#SPLITTING 
+
+step1 - Unmount 
+
+umount /dir1
+umount /dir2
+
+step2 - deactivate VG 
+
+vgchange -an VG1
+
+step3 - split 
+
+vgsplit VG1(VGname need to be split )  VG2( name we want to give split VG ) /dev/sdb2 (physical vol we want to use for splitted VG )
+
+step4 - activate 
+
+vgchnage -ay VG1 VG2
+
+check # vgscan /lsblk ewtc..etc
+
+step5- mount back 
+
+mount /dev/VG1/LV1 /dir1
+mount /dev/VG2/LV2 /dir2
+
