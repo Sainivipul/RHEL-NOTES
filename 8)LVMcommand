@@ -10,13 +10,13 @@ f- mounting of dir
 # Step1 Partition creation 
 
 DISK1- fdisk /dev/sdb --> 2 partition ( /dev/sdb1  /dev/sdb2)
-DISK2- fdisk /dev/sdc --> 2 poartion ( /dev/sdc1  , /dev/sdc2)
+DISK2- fdisk /dev/sdc --> 2 partiton ( /dev/sdc1  , /dev/sdc2)
 
 # STEP2 Physical volume 
 
 check available physical volume = pvs or pvdisplay 
 
-create physical volume -------------------
+create physical volume --
 
 pvcreate /dev/sdb1
 
@@ -35,9 +35,7 @@ vgcreate Linuxvg(name) /dev/sdb1 /dev/sdb2
 
  check lsblk 
 
-
-
- # step 5 file system 
+# step 5 file system 
 
  check details --> lsblk -f
 
@@ -56,15 +54,14 @@ mount /dev/LinuxVG/Linuxlv /DIR
 ----------------------------------------------------------------
 ## LV EXTEND ##
 
-
-case a) we have space in volume group 
+case a we have space in volume group 
 
 lvextend -L +xM(mb)/xG(GB) /dev/Linuxvg/Linuxlv -r
 
 NOTE: if it is not visible on filesystem 
 --> resize2fs /dev/Linuxvg/Linuxlv (for ext file system )
 
-case b) we do not have space in VG 
+case b we do not have space in VG 
 
 use other physical volume or create physical volume 
 
