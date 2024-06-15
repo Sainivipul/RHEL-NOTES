@@ -1,4 +1,4 @@
-## Bootinng sequence of rhel 
+## Bootinng sequence of Rhel 
 booting - the process of copying files of OS on RAM from HD drive is known as Booting
 booting files locate on /boot dir 
 

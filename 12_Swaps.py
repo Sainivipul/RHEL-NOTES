@@ -30,7 +30,7 @@ mkswap /dev/volgroup/swapnew  --make it swap
 free -m --check 
 lsblk --check we will find swap is ot in use 
 
-swapon /dev/mapper/volgroup-swapew   --activating swapenw
+swapon /dev/mapper/volgroup-swapnew   --activating swapenw
 
 lsblk --check
 
@@ -39,7 +39,7 @@ blkid /dev/mapper/volgroup-swapnew --to get uu id of our swap
 # to make this chage permaennt make change in fstab file 
 
 vim/etc/fsatb 
-go i last lie past UUID 
+go i last line past UUID 
 
 UUID swap defaults 00 --etry made i fstab chage is permananet nnow 
 
